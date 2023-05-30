@@ -1,3 +1,4 @@
+# this was built using a bq connection, but should be dialect agnostic
 connection: "looker-private-demo"
 
 label: "JC Persistent Navbar Example"
