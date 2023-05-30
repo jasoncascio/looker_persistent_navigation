@@ -1,9 +1,9 @@
-- dashboard: persistent_navigation_method_2_dashboard_1
-  title: Persistent Navigation Method 2, Dashboard 1
+- dashboard: persistent_navigation_method_2_dashboard_2
+  title: Persistent Navigation Method 2, Dashboard 2
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: sxwJiAlpq6F1OtQIJpgEy6
+  preferred_slug: GNwCarV64SRou7nGR9AcpM
   elements:
   - title: Basic Navigation Bar
     name: Basic Navigation Bar

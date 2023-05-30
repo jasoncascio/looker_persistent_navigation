@@ -1,17 +1,17 @@
-- dashboard: persistent_navigation_method_2_dashboard_1
-  title: Persistent Navigation Method 2, Dashboard 1
+- dashboard: persistent_navigation_method_1_dashboard_1
+  title: Persistent Navigation Method 1, Dashboard 1
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: sxwJiAlpq6F1OtQIJpgEy6
+  preferred_slug: vue6maUBhbZvZPtl0fS8Qz
   elements:
   - title: Basic Navigation Bar
     name: Basic Navigation Bar
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: single_value
-    fields: [navigation.basic_navigation_bar]
-    sorts: [navigation.basic_navigation_bar]
+    fields: [country_reference.basic_navigation_bar]
+    sorts: [country_reference.basic_navigation_bar]
     limit: 500
     column_limit: 50
     query_timezone: America/Los_Angeles
@@ -34,8 +34,8 @@
     defaults_version: 1
     series_types: {}
     listen:
-      Continent: navigation.continent
-      Country Name: navigation.country_name
+      Continent: country_reference.continent
+      Country Name: country_reference.country_name
     row: 0
     col: 4
     width: 17
@@ -43,11 +43,12 @@
   - title: Continents
     name: Continents
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: single_value
     fields: [country_reference.distinct_continents]
     limit: 500
     column_limit: 50
+    query_timezone: America/Los_Angeles
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -57,6 +58,33 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
     defaults_version: 1
     series_types: {}
     listen:
@@ -69,11 +97,12 @@
   - title: Countries
     name: Countries
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: single_value
     fields: [country_reference.count]
     limit: 500
     column_limit: 50
+    query_timezone: America/Los_Angeles
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -83,6 +112,33 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
     defaults_version: 1
     series_types: {}
     hidden_pivots: {}
@@ -96,7 +152,7 @@
   - title: Country List
     name: Country List
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: looker_grid
     fields: [country_reference.country_name, country_reference.continent, country_reference.small_country_flag,
       country_reference.iso2, country_reference.iso3, country_reference.small_country_flag_liquid]
@@ -134,7 +190,7 @@
   - title: Map
     name: Map
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: looker_google_map
     fields: [country_reference.iso2, country_reference.small_country_flag_liquid]
     limit: 500
@@ -171,10 +227,10 @@
   - title: Liquid Navigation Bar
     name: Liquid Navigation Bar
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     type: single_value
-    fields: [navigation.liquid_navigation_bar]
-    sorts: [navigation.liquid_navigation_bar]
+    fields: [country_reference.liquid_navigation_bar]
+    sorts: [country_reference.liquid_navigation_bar]
     limit: 500
     column_limit: 50
     custom_color_enabled: true
@@ -186,11 +242,38 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    series_types: {}
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
     defaults_version: 1
+    series_types: {}
     listen:
-      Continent: navigation.continent
-      Country Name: navigation.country_name
+      Continent: country_reference.continent
+      Country Name: country_reference.country_name
     row: 16
     col: 4
     width: 17
@@ -206,7 +289,7 @@
       type: checkboxes
       display: popover
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     listens_to_filters: [Country Name]
     field: country_reference.continent
   - name: Country Name
@@ -219,6 +302,6 @@
       type: tag_list
       display: popover
     model: jc_persistent_navbar
-    explore: flags2
+    explore: flags1
     listens_to_filters: [Continent]
     field: country_reference.country_name
