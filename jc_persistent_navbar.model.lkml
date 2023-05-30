@@ -3,7 +3,7 @@ connection: "looker-private-demo"
 label: "JC Persistent Navbar Example"
 
 include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-
+include: "/dashboards/*"
 
 #########################################################
 # Method 1: Add navigation to a view. This can be done directly in the view
@@ -90,7 +90,7 @@ explore: flags1 {
 
 #########################################################
 # Method 2: Join navigation view - could help with portability
-
+# be sure to send values down to the proper view!
 #########################################################
 
 view: navigation {derived_table: {sql: select NULL AS nothing;;}
