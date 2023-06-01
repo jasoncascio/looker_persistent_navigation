@@ -46,7 +46,6 @@ view: +country_reference {
       {% assign navString = "jc_persistent_navbar::persistent_navigation_method_1_dashboard_1|Persistent Navigation Method 1, Dashboard 1||jc_persistent_navbar::persistent_navigation_method_1_dashboard_2|Persistent Navigation Method 1, Dashboard 2" %}
       {% assign navItems = navString | split: "||" %}
 
-      <!-- NOTE: There's a bug in _explore._dashboard_url liquid implementation https://buganizer.corp.google.com/issues/281606368 -->
 
       <center>
         <div style="border-radius: 5px; padding: 5px 10px; height: 60px; background: #FFFFFF;">
@@ -94,7 +93,7 @@ explore: flags1 {
 
 
 #########################################################
-# Method 2: Join navigation view - could help with portability
+# Method 2: bare join - could help with portability
 # be sure to send values down to the proper view
 #########################################################
 
@@ -137,7 +136,7 @@ view: navigation {
     sql: '' ;;
     html:
       <!-- nav setup -->
-      {% assign navString = "jc_persistent_navbar::persistent_navigation_method_2_dashboard_1|Persistent Navigation Method 2, Dashboard 1||jc_persistent_navbar::persistent_navigation_method_2_dashboard_2|Persistent Navigation Method 2, Dashboard 1" %}
+      {% assign navString = "jc_persistent_navbar::persistent_navigation_method_2_dashboard_1|Persistent Navigation Method 2, Dashboard 1||jc_persistent_navbar::persistent_navigation_method_2_dashboard_2|Persistent Navigation Method 2, Dashboard 2" %}
       {% assign navItems = navString | split: "||" %}
 
       <!-- NOTE: There's a bug in _explore._dashboard_url liquid implementation https://buganizer.corp.google.com/issues/281606368 -->
@@ -175,11 +174,6 @@ view: navigation {
     ;;
   }
 
-  dimension: dash_bindings {
-    type: string
-    sql: ${TABLE}.dashBindings ;;
-  }
-
 }
 
 
@@ -195,114 +189,43 @@ explore: flags2 {
 
 
 #########################################################
-# Method 2: Join navigation view - could help with portability
-# be sure to send values down to the proper view!
+# Method 3: Fully modular navigation - extending modular_navigation_base with bare join
+# be sure to send values down to the proper view & filters
 #########################################################
 
-
-view: modular_navigation {
-  extension: required
-
-  # "variables" to send values to, because of bare join
-  # hide these in the extension as required
-  filter: filter0 { hidden: no }
-  filter: filter1 { hidden: no }
-  filter: filter2 { hidden: no }
-
-  # Fancier example using liquid: https://shopify.github.io/liquid/
-  # Looker liquid reference: https://cloud.google.com/looker/docs/liquid-variable-reference
-  dimension: liquid_navigation_bar {
-    type: string
-    sql: '' ;;
-    html:
-      <!-- nav setup -->
-      {% assign navItems = dashBindings._value | split: itemDelimiter._value %}
-      {% assign filterItems = filterBindings._value | split: itemDelimiter._value %}
-      {% assign filterCount = filterItems | size %}
-
-      <!-- build filter querystring, add more blocks for more filters -->
-      {% assign queryString = "" %}
-
-      {% if filterCount >= 1 %}
-        {% assign filterItem0 = filterItems[0] | split: valueDelimiter._value %}
-        {% assign filterString0 = filterItem0[1] | append: "=" | append: _filters['{{ filterItem0[0] }}'] %}
-        {% assign queryString = queryString | append: filterString0 | append: '&' %}
-      {% endif %}
-
-      {% if filterCount >= 2 %}
-        {% assign filterItem1 = filterItems[1] | split: valueDelimiter._value %}
-        {% assign filterString1 = filterItem1[1] | append: "=" | append: _filters['{{ filterItem1[0] }}'] %}
-        {% assign queryString = queryString | append: filterString1 | append: '&' %}
-      {% endif %}
-
-      <center>
-        <div style="border-radius: 5px; padding: 5px 10px; height: 60px; background: #FFFFFF;">
-          <span style="font-size: 18px; display: table; margin:0 auto;">
-            <img style="float: left; height: 40px;" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"/>
-
-            <!-- Liquid Loop -->
-            {% for navItem in navItems %}
-
-              {% assign navParts = navItem | split: valueDelimiter._value %}
-              {% assign dashName = navParts[1] %}
-              {% assign dashUrl = "/dashboards/" | append: navParts[0] %}
-
-              <!-- establish link style -->
-              {% assign linkStyle = "color: #0059D6; padding: 5px 15px; float: left; line-height: 40px;" %}
-
-              <!-- build links -->
-              {% if _explore._dashboard_url == dashUrl %}
-                <span style="{{ linkStyle }} font-weight:bold;">{{ dashName }}</span>
-              {% else %}
-                <a style="{{ linkStyle }}" href="{{ dashUrl }}?{{ queryString }}">{{ dashName }}</a>
-              {% endif %}
-
-            {% endfor %}
-
-          </span>
-        </div>
-
-        <!-- NOTE: There's a bug in _explore._dashboard_url liquid implementation https://buganizer.corp.google.com/issues/281606368 -->
-
-        <div>
-          <span style="font-size: 10px;">{{ _explore._dashboard_url }} - clear cache & refresh (bug 281606368)</span>
-        </div>
-      </center>
-      ;;
-  }
+view: modular_navigation_usage_example {
+  extends: [modular_navigation_base]
 
   dimension: dashBindings {
     hidden: yes
     type: string
-    sql: ${TABLE}.dashBindings ;;
+    sql: 'jc_persistent_navbar::persistent_navigation_method_3_dashboard_1|Persistent Navigation Method 3, Dashboard 1||jc_persistent_navbar::persistent_navigation_method_3_dashboard_2|Persistent Navigation Method 3, Dashboard 2' ;;
   }
 
   dimension: filterBindings {
     hidden: yes
     type: string
-    sql: ${TABLE}.filterBindings ;;
+    sql: 'filter1|Continent||filter2|Country+Name' ;;
   }
 
-  dimension: itemDelimiter {
+  filter: filter1 {
+    hidden: no
+    label: "Continent"
+  }
+  filter: filter2 {
+    hidden: no
+    label: "Country Name"
+  }
+  filter: filter3 { # not used in this example
     hidden: yes
-    type: string
-    sql: ${TABLE}.itemDelimiter ;;
   }
-
-  dimension: valueDelimiter {
+  filter: filter4 { # not used in this example
     hidden: yes
-    type: string
-    sql: ${TABLE}.valueDelimiter ;;
+  }
+  filter: filter5 { # not used in this example
+    hidden: yes
   }
 
-}
-
-view: modular_navigation_usage_example {
-  extends: [modular_navigation]
-
-  filter: filter0 { hidden: no }
-  filter: filter1 { hidden: no }
-  filter: filter2 { hidden: yes }
 }
 
 
@@ -310,16 +233,5 @@ explore: flags3 {
   label: "Persistent Navigation Method 3"
   view_name: country_reference
 
-  join: modular_navigation_usage_example {
-    sql:
-      LEFT JOIN (
-        SELECT
-            'jc_persistent_navbar::persistent_navigation_method_2_dashboard_1|Persistent Navigation Method 2, Dashboard 1||jc_persistent_navbar::persistent_navigation_method_2_dashboard_2|Persistent Navigation Method 2, Dashboard 1' AS dashBindings
-          , 'filter0|Continent||filter1|Country+Name' AS filterBindings
-          , '||' AS itemDelimiter
-          , '|' AS valueDelimiter
-      ) AS modular_navigation_usage_example ON {{ modular_navigation_usage_example.liquid_navigation_bar._in_query }}
-    ;;
-    relationship: many_to_one
-  }
+  join: modular_navigation_usage_example {}
 }
