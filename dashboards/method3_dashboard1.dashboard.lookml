@@ -28,8 +28,8 @@
       Continent: country_reference.continent
       Country Name: country_reference.country_name
     row: 3
-    col: 4
-    width: 3
+    col: 1
+    width: 4
     height: 4
   - title: Countries
     name: Countries
@@ -55,8 +55,8 @@
       Continent: country_reference.continent
       Country Name: country_reference.country_name
     row: 7
-    col: 4
-    width: 3
+    col: 1
+    width: 4
     height: 4
   - title: Country List
     name: Country List
@@ -93,8 +93,8 @@
       Continent: country_reference.continent
       Country Name: country_reference.country_name
     row: 3
-    col: 7
-    width: 14
+    col: 5
+    width: 18
     height: 8
   - title: Map
     name: Map
@@ -130,9 +130,9 @@
       Continent: country_reference.continent
       Country Name: country_reference.country_name
     row: 11
-    col: 4
-    width: 17
-    height: 6
+    col: 1
+    width: 22
+    height: 7
   - title: Modular Navigation Example
     name: Modular Navigation Example
     model: jc_persistent_navbar
@@ -170,8 +170,8 @@
       Continent: modular_navigation_usage_example.filter1
       Country Name: modular_navigation_usage_example.filter2
     row: 0
-    col: 4
-    width: 17
+    col: 1
+    width: 22
     height: 3
   filters:
   - name: Continent
