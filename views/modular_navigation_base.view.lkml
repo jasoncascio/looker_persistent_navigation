@@ -14,7 +14,7 @@ view: modular_navigation_base {
   dimension: filterBindings {
     hidden: yes
     type: string
-    sql: 'filter1|Filter 1 Name||filter1|Filter 2 Name' ;;
+    sql: 'filter1|Filter 1 Name||filter2|Filter 2 Name' ;;
   }
 
 
@@ -36,12 +36,17 @@ view: modular_navigation_base {
 
 
   # ** override hidden and label in extension as required **
-  # ** Add more as required, currently supports 5 **
-  filter: filter1 { hidden: no label: "filter1" }
-  filter: filter2 { hidden: no label: "filter2" }
-  filter: filter3 { hidden: no label: "filter3" }
-  filter: filter4 { hidden: no label: "filter4" }
-  filter: filter5 { hidden: no label: "filter5" }
+  # ** Add more as required, currently supports 10 filters **
+  filter: filter1 { hidden: yes label: "filter1" }
+  filter: filter2 { hidden: yes label: "filter2" }
+  filter: filter3 { hidden: yes label: "filter3" }
+  filter: filter4 { hidden: yes label: "filter4" }
+  filter: filter5 { hidden: yes label: "filter5" }
+  filter: filter6 { hidden: yes label: "filter6" }
+  filter: filter7 { hidden: yes label: "filter7" }
+  filter: filter8 { hidden: yes label: "filter8" }
+  filter: filter9 { hidden: yes label: "filter9" }
+  filter: filter10 { hidden: yes label: "filter10" }
 
 
   ########################################
@@ -68,6 +73,7 @@ view: modular_navigation_base {
 
         <!-- case on filter, because we can't mix value interpolation into logic evaluation -->
         <!-- for example, this will not work: {% assign filterValue = _filters['{{ filter }}'] %} -->
+        <!-- can't use capture as its not supported in liquid in Looker https://shopify.github.io/liquid/tags/variable/#capture -->
         <!-- ** Add more cases for more filters ** -->
         {% case filterField %}
           {% when "filter1" %}
@@ -80,6 +86,16 @@ view: modular_navigation_base {
             {% assign filterValue = _filters['filter4'] %}
           {% when "filter5" %}
             {% assign filterValue = _filters['filter5'] %}
+          {% when "filter6" %}
+            {% assign filterValue = _filters['filter6'] %}
+          {% when "filter7" %}
+            {% assign filterValue = _filters['filter7'] %}
+          {% when "filter8" %}
+            {% assign filterValue = _filters['filter8'] %}
+          {% when "filter9" %}
+            {% assign filterValue = _filters['filter9'] %}
+          {% when "filter10" %}
+            {% assign filterValue = _filters['filter10'] %}
           {% else %}
             {% assign filterValue = "out of range filter" %}
         <!-- if you see this value, you've added more filters than supported in filterBindings -->

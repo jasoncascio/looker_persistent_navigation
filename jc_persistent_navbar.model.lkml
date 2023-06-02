@@ -216,15 +216,6 @@ view: modular_navigation_usage_example {
     hidden: no
     label: "Country Name"
   }
-  filter: filter3 { # not used in this example
-    hidden: yes
-  }
-  filter: filter4 { # not used in this example
-    hidden: yes
-  }
-  filter: filter5 { # not used in this example
-    hidden: yes
-  }
 
 }
 
